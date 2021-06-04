@@ -27,11 +27,11 @@ describe('Gilded Rose', function () {
 
     describe('Decrease quality until min', function () {
         
-        it('should add one to quality', function() {
+        it('should take one from quality', function() {
             //arrange
             const gildedRose = new GildedRose([ new Item('item', 10, 10) ]);
             //act
-            gildedRose.updateQuality();
+            gildedRose.decreaseQualityUntilMinimum(gildedRose.items[0]);
             //assert
             expect(gildedRose.items[0].quality).to.equal(9);
         });
@@ -41,7 +41,7 @@ describe('Gilded Rose', function () {
             //arrange
             const gildedRose = new GildedRose([new Item('item', 10, 0)])
             //act
-            gildedRose.updateQuality();
+            gildedRose.decreaseQualityUntilMinimum(gildedRose.items[0]);
             //assert
             expect(gildedRose.items[0].quality).to.equal(0);
         })
@@ -53,7 +53,8 @@ describe('Gilded Rose', function () {
             //arrange
             const gildedRose = new GildedRose([ new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10) ]);
             //act
-            gildedRose.updateQuality();
+            gildedRose.increaseQualityOfBackstagePasses(gildedRose.items[0]);
+
             //assert
             expect(gildedRose.items[0].quality).to.equal(12);
         });
@@ -63,12 +64,34 @@ describe('Gilded Rose', function () {
             //arrange
             const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 5, 10)])
             //act
-            gildedRose.updateQuality();
+            gildedRose.increaseQualityOfBackstagePasses(gildedRose.items[0]);
             //assert
             expect(gildedRose.items[0].quality).to.equal(13);
         })
     });
 
+    describe('Decrease sell in days', function () {
+        
+        it('should decrease by 1 if item is not sulfuras', function() {
+            //arrange
+            const gildedRose = new GildedRose([ new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10) ]);
+            //act
+            gildedRose.decreaseSellIn(gildedRose.items[0]);
+
+            //assert
+            expect(gildedRose.items[0].sellIn).to.equal(9);
+        });
+
+
+        it('should not change if item is sulfuras', function () {
+            //arrange
+            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 5, 10)])
+            //act
+            gildedRose.decreaseSellIn(gildedRose.items[0]);
+            //assert
+            expect(gildedRose.items[0].sellIn).to.equal(5);
+        })
+    });
 
 });
 

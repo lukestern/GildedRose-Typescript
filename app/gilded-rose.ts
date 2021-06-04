@@ -14,55 +14,42 @@ export class GildedRose {
     items: Array<Item>;
     maxQuality: number;
     minQuality: number;
+    tenDaysTillConcert: number;
+    fiveDaysTillConcert: number;
+    backstagePasses: string;
+    sulfuras: string;
 
     constructor(items = [] as Array<Item>) {
         this.items = items;
         this.maxQuality = 50;
         this.minQuality = 0;
+        this.backstagePasses = 'Backstage passes to a TAFKAL80ETC concert';
+        this.sulfuras = 'Sulfuras, Hand of Ragnaros';
+        this.tenDaysTillConcert = 10;
+        this.fiveDaysTillConcert = 5;
     }
 
     updateQuality() {
-        let sulfuras = 'Sulfuras, Hand of Ragnaros';
         let brie = 'Aged Brie';
-        let backstagePasses = 'Backstage passes to a TAFKAL80ETC concert';
-        let tenDaysTillConcert = 10;
-        let fiveDaysTillConcert = 5;
 
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
 
-            if (item.name != brie && item.name != backstagePasses) {
-                if (item.name != sulfuras) {
-                    if (item.quality > this.minQuality) {
-                        item.quality--;
-                    }
+            if (item.name != brie && item.name != this.backstagePasses) {
+                if (item.name != this.sulfuras) {
+                    this.decreaseQualityUntilMinimum(item);
                 }
             } else {
-                this.increaseQualityUntilMaximum(item);
-
-                if (item.name == backstagePasses) {
-
-                    if (item.sellIn <= tenDaysTillConcert) {
-                        this.increaseQualityUntilMaximum(item);
-                    }
-
-                    if (item.sellIn <= fiveDaysTillConcert) {
-                        this.increaseQualityUntilMaximum(item);
-                    }
-                }
+                this.increaseQualityOfBackstagePasses(item);
             }
 
-            if (item.name != sulfuras) {
-                item.sellIn--
-            }
+            this.decreaseSellIn(item)
 
             if (item.sellIn < 0) {
                 if (item.name != brie) {
-                    if (item.name != backstagePasses) {
-                        if (item.quality > this.minQuality) {
-                            if (item.name != sulfuras) {
-                                item.quality--;
-                            }
+                    if (item.name != this.backstagePasses) {
+                        if (item.name != this.sulfuras) {
+                            this.decreaseQualityUntilMinimum(item);
                         }
                     } else {
                         item.quality = this.minQuality;
@@ -75,11 +62,25 @@ export class GildedRose {
         return this.items;
     }
 
-
     increaseQualityUntilMaximum(item: Item) {
-        if (item.quality < this.maxQuality) {
-            item.quality++;
+        item.quality < this.maxQuality ? item.quality++ : null;
+    }
+
+    decreaseQualityUntilMinimum(item: Item) {
+        item.quality > this.minQuality ? item.quality-- : null;
+    }
+
+    increaseQualityOfBackstagePasses(item: Item) {
+        this.increaseQualityUntilMaximum(item);
+        if (item.name == this.backstagePasses) {
+            item.sellIn <= this.tenDaysTillConcert ? this.increaseQualityUntilMaximum(item) : null;
+            item.sellIn <= this.fiveDaysTillConcert ? this.increaseQualityUntilMaximum(item) : null;
         }
     }
+
+    decreaseSellIn(item: Item) {
+        item.name != this.sulfuras ? item.sellIn-- : null;
+    }
 }
+
 
