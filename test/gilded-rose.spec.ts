@@ -4,10 +4,10 @@ import { Item, GildedRose } from '../app/gilded-rose';
 describe('Gilded Rose', function () {
 
     describe('Increase quality until max', function () {
-        
-        it('should add one to quality', function() {
+
+        it('should add one to quality', function () {
             //arrange
-            const gildedRose = new GildedRose([ new Item('Aged Brie', 10, 0) ]);
+            const gildedRose = new GildedRose([new Item('Aged Brie', 10, 0)]);
             //act
             gildedRose.increaseQualityUntilMaximum(gildedRose.items[0]);
             //assert
@@ -26,10 +26,10 @@ describe('Gilded Rose', function () {
     });
 
     describe('Decrease quality until min', function () {
-        
-        it('should take one from quality', function() {
+
+        it('should take one from quality', function () {
             //arrange
-            const gildedRose = new GildedRose([ new Item('item', 10, 10) ]);
+            const gildedRose = new GildedRose([new Item('item', 10, 10)]);
             //act
             gildedRose.decreaseQualityUntilMinimum(gildedRose.items[0]);
             //assert
@@ -48,10 +48,10 @@ describe('Gilded Rose', function () {
     });
 
     describe('Increase quality of backstage pass', function () {
-        
-        it('by 2', function() {
+
+        it('by 2', function () {
             //arrange
-            const gildedRose = new GildedRose([ new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10) ]);
+            const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10)]);
             //act
             gildedRose.increaseQualityOfBackstagePasses(gildedRose.items[0]);
 
@@ -71,10 +71,10 @@ describe('Gilded Rose', function () {
     });
 
     describe('Decrease sell in days', function () {
-        
-        it('should decrease by 1 if item is not sulfuras', function() {
+
+        it('should decrease by 1 if item is not sulfuras', function () {
             //arrange
-            const gildedRose = new GildedRose([ new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10) ]);
+            const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10)]);
             //act
             gildedRose.decreaseSellIn(gildedRose.items[0]);
 
@@ -94,4 +94,3 @@ describe('Gilded Rose', function () {
     });
 
 });
-

@@ -34,27 +34,26 @@ export class GildedRose {
 
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
+            
+            this.decreaseSellIn(item);
 
-            if (item.name != brie && item.name != this.backstagePasses) {
-                if (item.name != this.sulfuras) {
-                    this.decreaseQualityUntilMinimum(item);
-                }
+            if (!(item.name === brie || item.name === this.backstagePasses || item.name === this.sulfuras)) {
+                this.decreaseQualityUntilMinimum(item);
             } else {
                 this.increaseQualityOfBackstagePasses(item);
             }
 
-            this.decreaseSellIn(item)
 
             if (item.sellIn < 0) {
-                if (item.name != brie) {
-                    if (item.name != this.backstagePasses) {
-                        if (item.name != this.sulfuras) {
-                            this.decreaseQualityUntilMinimum(item);
-                        }
-                    } else {
-                        item.quality = this.minQuality;
-                    }
-                } else {
+                if (!(item.name === brie || item.name === this.sulfuras)) {
+                    this.decreaseQualityUntilMinimum(item);  
+                } 
+
+                if (item.name === this.backstagePasses) {
+                    item.quality = this.minQuality;
+                }
+                
+                if (item.name === brie) {
                     this.increaseQualityUntilMaximum(item);
                 }
             }
