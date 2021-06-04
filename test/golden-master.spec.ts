@@ -2,7 +2,7 @@ const { Item, GildedRose } = require('../app/gilded-rose');
 const { expect } = require('chai');
 
 // Add a master test here
-describe.only('Gilded Rose Master Test', function () {
+describe('Gilded Rose Master Test', function () {
     // Arrange
     let gildedRose;
     let startItems;

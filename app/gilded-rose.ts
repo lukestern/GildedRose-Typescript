@@ -38,18 +38,16 @@ export class GildedRose {
                     }
                 }
             } else {
-                if (item.quality < this.maxQuality) {
-                    item.quality++;
+                this.increaseQualityUntilMaximum(item);
 
-                    if (item.name == backstagePasses) {
+                if (item.name == backstagePasses) {
 
-                        if (item.sellIn <= tenDaysTillConcert) {
-                            this.increaseQualityUntilMaximum(item);
-                        }
+                    if (item.sellIn <= tenDaysTillConcert) {
+                        this.increaseQualityUntilMaximum(item);
+                    }
 
-                        if (item.sellIn <= fiveDaysTillConcert) {
-                            this.increaseQualityUntilMaximum(item);
-                        }
+                    if (item.sellIn <= fiveDaysTillConcert) {
+                        this.increaseQualityUntilMaximum(item);
                     }
                 }
             }
@@ -74,14 +72,14 @@ export class GildedRose {
                 }
             }
         }
-
         return this.items;
     }
+
 
     increaseQualityUntilMaximum(item: Item) {
         if (item.quality < this.maxQuality) {
             item.quality++;
         }
     }
-
 }
+
