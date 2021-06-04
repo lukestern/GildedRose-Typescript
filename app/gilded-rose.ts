@@ -34,8 +34,6 @@ export class GildedRose {
 
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
-            
-            this.decreaseSellIn(item);
 
             if (!(item.name === brie || item.name === this.backstagePasses || item.name === this.sulfuras)) {
                 this.decreaseQualityUntilMinimum(item);
@@ -43,6 +41,7 @@ export class GildedRose {
                 this.increaseQualityOfBackstagePasses(item);
             }
 
+            this.decreaseSellIn(item);
 
             if (item.sellIn < 0) {
                 if (!(item.name === brie || item.name === this.sulfuras)) {
