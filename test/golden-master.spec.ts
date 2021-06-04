@@ -4,7 +4,7 @@ const { expect } = require('chai');
 // Add a master test here
 describe.only('Gilded Rose Master Test', function () {
     // Arrange
-    let gildedRose
+    let gildedRose;
     let startItems;
     beforeEach(() => {
         startItems = new Array();
@@ -40,7 +40,7 @@ describe.only('Gilded Rose Master Test', function () {
 
     it('should behave as it did at the start with five runs', function () {
         //Act
-        let items
+        let items;
         for (let i = 0; i < 5; i++) {
             items = gildedRose.updateQuality();
         }
@@ -65,7 +65,7 @@ describe.only('Gilded Rose Master Test', function () {
 
     it('should behave as it did at the start with 10 runs', function () {
         //Act
-        let items
+        let items;
         for (let i = 0; i < 10; i++) {
             items = gildedRose.updateQuality();
         }
@@ -90,7 +90,7 @@ describe.only('Gilded Rose Master Test', function () {
 
     it('should behave as it did at the start with 12 runs', function () {
         //Act
-        let items
+        let items;
         for (let i = 0; i < 12; i++) {
             items = gildedRose.updateQuality();
         }

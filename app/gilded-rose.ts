@@ -3,7 +3,7 @@ export class Item {
     sellIn: number;
     quality: number;
 
-    constructor(name, sellIn, quality) {
+    constructor(name: string, sellIn: number, quality: number) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
@@ -32,14 +32,15 @@ export class GildedRose {
             const item = this.items[i];
 
             if (item.name != brie && item.name != backstagePasses) {
-                if (item.quality > this.minQuality) {
-                    if (item.name != sulfuras) {
+                if (item.name != sulfuras) {
+                    if (item.quality > this.minQuality) {
                         item.quality--;
                     }
                 }
             } else {
                 if (item.quality < this.maxQuality) {
                     item.quality++;
+
                     if (item.name == backstagePasses) {
 
                         if (item.sellIn <= tenDaysTillConcert) {
@@ -77,7 +78,7 @@ export class GildedRose {
         return this.items;
     }
 
-    increaseQualityUntilMaximum(item) {
+    increaseQualityUntilMaximum(item: Item) {
         if (item.quality < this.maxQuality) {
             item.quality++;
         }
